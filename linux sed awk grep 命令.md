@@ -76,7 +76,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 `\|` | 或的意思 `a\|b` 就是匹配a或者是b
 `f` | 分组及引用：
 `\(\) `|将`()`中字符集合到一起作为一个字符引用，如果是使用egrep 直接`()`
-`#` | 引用，模式中自左而右,而非模式本身
+`\#` | 引用，模式中自左而右,而非模式本身
 
 #####正则表达式的贪婪与非贪婪模式
 
@@ -92,7 +92,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 2.用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,要将捉到的关键字显色，且加上行号来表示：
 
-`grep -n root /etc/passwd`
+`dmesg | grep -n eth`
 
 3.将/etc/passwd，将没有出现 root 的行取出来
 
