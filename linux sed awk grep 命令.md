@@ -16,7 +16,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 #### grep 常用选项
 参数|说明
--|-
+---|---
 -v|显示不包含匹配文本的所有行。
 -o|仅显示匹配的字串，而非字串所在的行/不常用
 -i|忽略字符大小写
@@ -33,7 +33,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 #####字符匹配
 参数|说明
--|-
+---|---
 `.` | 匹配任意单个字符，相当于通配符?
 `[]` |匹配指定范围内的任意单个字符
 `[^]` | 匹配指定范围外的任意单个字符
@@ -124,41 +124,46 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 >their test file 
 
-8. 在siaz.txt 文件中匹配以the作为单词首部的行
+- 在siaz.txt 文件中匹配以the作为单词首部的行
 
-`grep "\<the" siaz.txt`
+	`grep "\<the" siaz.txt`
 
-9. 在siaz.txt 文件中匹配以the作为单词词尾的行
+- 在siaz.txt 文件中匹配以the作为单词词尾的行
 
-`grep "the\>" siaz.txt`
+	`grep "the\>" siaz.txt`
 
-10. 在siaz.txt 文件中 匹配/etc/passwd中包含单词"the"的行
+- 在siaz.txt 文件中匹配包含单词`"the"`的行
 
-`grep "\bthe\b" siaz.txt`
+	`grep "\bthe\b" siaz.txt`
 
-11.在/etc/passwd中 匹配单个字符 r..t
+- 在/etc/passwd中 匹配单个字符`r..t`
 
-`grep "r..t" /etc/passwd`
+	`grep "r..t" /etc/passwd`
 
-12.匹配0个或多个重复位于星号前的字符 ：从/etc/passwd中匹配rt、rot、root、roo*t
+- 在/etc/passwd中匹配0个或多个位于星号前的字符
 
-`grep 'ro*t' /etc/passwd`
+	`grep 'ro*t' /etc/passwd`
 
-13.匹配一组字符中的任意一个， 从/etc/passwd中匹配包含test1或best的行
+- 在/etc/passwd中匹配一组字符中的任意一个
 
-`grep "[tb]est" /etc/passwd`
+	`grep "[tb]est" /etc/passwd`
 
-14.匹配/etc/passwd中不包含root的行
+- 匹配/etc/passwd中不包含root的行
 
-`grep "^[^root]" /etc/passwd`   ([^root] 取非root字符，^ 开头非root的行）
+	`grep "^[^root]" /etc/passwd` 
+>  `[^root]` 取非root字符，`^` 开头非root的行
 
-15.匹配/etc/passwd中字母o连续出现2次的行
+- 匹配/etc/passwd中字母o连续出现2次的行
 
-`grep "o\{2\}"  /etc/passwd`
+	`grep "o\{2\}"  /etc/passwd`
+	 
+	 `grep -E "o{2}"  /etc/passwd`
 
-`grep -E "o{2}"  /etc/passwd`
+>测试文件bb.txt 内容如下
 
-测试文件bb.txt 内容如下
+>ro
+
+>roooooooooooooooooot
 
 16.匹配文件bb.txtx 中 最少出现m次，最多出现n次
 
