@@ -117,7 +117,9 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 	`grep "nologin$" /etc/passwd`
 
 >创建一个测试文件内容如下: 
+
 >the test file 
+
 >their test file 
 
 8. 在siaz.txt 文件中匹配以the作为单词首部的行
