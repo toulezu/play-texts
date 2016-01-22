@@ -15,96 +15,68 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 ###二 grep用法
 
 ####1.grep 常用选项：
-
-- -v: 显示不包含匹配文本的所有行。
-
-- -o: 仅显示匹配的字串，而非字串所在的行
-
-- -i: 忽略字符大小写
-
-- -n：输出匹配行的行号
-
-- -q:安静模式，不打印任何标准输出
-
-- -E: 扩展正则表达式，相当于egrep,egrep 扩展正则表达式
-
-- -F:固定字符串列表，相当于fgrep，fgrep 不支持正则表达式
-
-- -A：显示被模式匹配到的行及后#行
-
-- -B：显示被模式匹配到的行及前#行
-
-- -C：显示被模式匹配到的行及其前后各#行
-
-- –color=auto ：可以将找到的关键词部分加上颜色的显示
+参数|说明
+-|-
+-v| 显示不包含匹配文本的所有行。
+ -o|仅显示匹配的字串，而非字串所在的行
+-i| 忽略字符大小写
+ -n|输出匹配行的行号
+ -|:安静模式，不打印任何标准输出
+ -E| 扩展正则表达式，相当于egrep,egrep 扩展正则表达式
+ -F|固定字符串列表，相当于fgrep，fgrep 不支持正则表达式
+ -A|显示被模式匹配到的行及后#行
+ -B|显示被模式匹配到的行及前#行
+ -C|显示被模式匹配到的行及其前后各#行
+ `–color=auto` |可以将找到的关键词部分加上颜色的显示
 
 ####2.正则表达式:
 
 #####a.字符匹配：
-
-- . : 匹配任意单个字符，相当于通配符?；
-
-- [] : 匹配指定范围内的任意单个字符；
-
-- [^] : 匹配指定范围外的任意单个字符；
+参数|说明
+-|-
+`.` | 匹配任意单个字符，相当于通配符?；
+`[]` |匹配指定范围内的任意单个字符；
+`[^]` | 匹配指定范围外的任意单个字符
 
 #####b.常用特殊字符匹配 ：
-
-[0-9] = [[:digit:]] ：匹配数字
-
-[a-z] = [[:lower:]] : 匹配小写字母
-
-[0-9a-zA-Z] = [[:alnum:]] : 匹配大小写字母或数字
-
-[a-zA-Z] = [[:alpha:]] : 匹配字母，大小写字母
-
-[[:space:]] = \s : 匹配空白字符
-
-[A-Z] = [[:upper:]] = :  代表大小字写母
+参数|说明
+-|-
+`[0-9] = [[:digit:]]` |匹配数字
+`[a-z] = [[:lower:]]`  |匹配小写字母
+`[0-9a-zA-Z] = [[:alnum:]]`| 匹配大小写字母或数字
+`[a-zA-Z] = [[:alpha:]]` | 匹配字母，大小写字母
+`[[:space:]] = \s` | 匹配空白字符
+`[A-Z] = [[:upper:]]`  |  代表大小字写母
 
 #####c. 次数匹配：
-
-* ：匹配*前面的单个字符任意次，可以为0次；
-
-.*：匹配任意长度的任意字符；
-
-\?：匹配?前面的字符0或者1次；如果是使用egrep 直接？
-
-\+：匹配+前面的字符至少1次；如果是使用egrep 直接+
-
-\{m,n\}：匹配其左侧的字符至少m次，至多n次；如果是使用egrep 直接{m,n}
-
-\{m,\}：匹配其左侧的字符至少m次 如果是使用egrep 直接{m,}
-
-\{0,n\}：匹配其左侧的字符至多n次   如果是使用egrep 直接{0,n}
-
-\{m\}：精确匹配其左侧的字符m次 如果是使用egrep 直接{m}
+参数|说明
+-|-
+`*`|匹配*前面的单个字符任意次，可以为0次；
+`.*`|匹配任意长度的任意字符；
+`\?`|匹配?前面的字符0或者1次；如果是使用egrep 直接？
+`\+`|匹配+前面的字符至少1次；如果是使用egrep 直接+
+`\{m,n\}`|匹配其左侧的字符至少m次，至多n次；如果是使用egrep 直接{m,n}
+`\{m,\}`|匹配其左侧的字符至少m次 如果是使用egrep 直接{m,}
+`\{0,n\}`|匹配其左侧的字符至多n次   如果是使用egrep 直接{0,n}
+`\{m\}`|精确匹配其左侧的字符m次 如果是使用egrep 直接{m}
 
 #####d. 位置锚定:
-
-^ ：锚定行首
-
-$ ： 锚定行尾
-
-^$ ：匹配空白行,^[[:space:]]$ 一样的效果
-
+参数|说明
+-|-
+`^` |锚定行首
+`$` | 锚定行尾
+`^$` |匹配空白行,^[[:space:]]$ 一样的效果
 #####e. 单词锚定:
-
-\< ：锚定词首
-
-\>：锚定词尾
-
-\<PATTERN\>：匹配PATTERN能匹配到的整个单词
-
-\b：匹配一个字边界，即字与空格间的位置
-
-|: 或的意思 a|b 就是匹配a或者是b
-
-f. 分组及引用：
-
-\(\) :将()中字符集合到一起作为一个字符引用，如果是使用egrep 直接（）
-
-\#:引用，模式中自左而右,而非模式本身
+参数|说明
+-|-
+`\<` |锚定词首
+`\>`|锚定词尾
+`\<PATTERN\>`|匹配PATTERN能匹配到的整个单词
+`\b`|匹配一个字边界，即字与空格间的位置
+`|`   | 或的意思 a|b 就是匹配a或者是b
+`f` | 分组及引用：
+`\(\) `|将()中字符集合到一起作为一个字符引用，如果是使用egrep 直接（）
+`\#` | 引用，模式中自左而右,而非模式本身
 3.正则表达式的贪婪与非贪婪模式
 
 贪婪匹配:正则表达式一般趋向于最大长度匹配，也就是所谓的贪婪匹配。
@@ -117,125 +89,125 @@ f. 分组及引用：
 
 1.将/etc/passwd，有出现 root 的行取出来,同时显示这些行在/etc/passwd的行号
 
-grep -n root /etc/passwd
+`grep -n root /etc/passwd`
 
 2.用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,要将捉到的关键字显色，且加上行号来表示：
 
-grep -n root /etc/passwd
+`grep -n root /etc/passwd`
 
 3.将/etc/passwd，将没有出现 root 的行取出来
 
-grep -v root /etc/passwd
+`grep -v root /etc/passwd`
 
 4.用 dmesg 列出核心信息，再以 grep 找出内含 eth0 那行,在关键字所在行的前两行与后三行也一起捉出来显示
 
-dmesg | grep -n -A3 -B2 'eth0'
+`dmesg | grep -n -A3 -B2 'ethic'`
 
 5.搜索cc.txt下aa 关键字忽略字母大小写，命令如下：
 
-grep -i ‘aa' cc.txt
+`grep -i 'aa' cc.txt`
 
 6.在/etc/passwd 查找以root开头的行
 
-grep "^root" /etc/passwd
+`grep "^root" /etc/passwd`
 
 7. 在/etc/passwd  查找以nologin结尾的行
 
-grep "nologin$" /etc/passwd
+`grep "nologin$" /etc/passwd`
 
 创建一个测试文件内容如下
 
 8. 在siaz.txt 文件中匹配以the作为单词首部的行
 
-grep "\<the" siaz.txt
+`grep "\<the" siaz.txt`
 
 9. 在siaz.txt 文件中匹配以the作为单词词尾的行
 
-grep "the\>" siaz.txt
+`grep "the\>" siaz.txt`
 
 10. 在siaz.txt 文件中 匹配/etc/passwd中包含单词"the"的行
 
-grep "\bthe\b" siaz.txt
+`grep "\bthe\b" siaz.txt`
 
 11.在/etc/passwd中 匹配单个字符 r..t
 
-grep "r..t" /etc/passwd
+`grep "r..t" /etc/passwd`
 
 12.匹配0个或多个重复位于星号前的字符 ：从/etc/passwd中匹配rt、rot、root、roo*t
 
-grep 'ro*t' /etc/passwd
+`grep 'ro*t' /etc/passwd`
 
 13.匹配一组字符中的任意一个， 从/etc/passwd中匹配包含test1或best的行
 
-grep "[tb]est" /etc/passwd
+`grep "[tb]est" /etc/passwd`
 
 14.匹配/etc/passwd中不包含root的行
 
-grep "^[^root]" /etc/passwd   ([^root] 取非root字符，^ 开头非root的行）
+`grep "^[^root]" /etc/passwd`   ([^root] 取非root字符，^ 开头非root的行）
 
 15.匹配/etc/passwd中字母o连续出现2次的行
 
-grep "o\{2\}"  /etc/passwd
+`grep "o\{2\}"  /etc/passwd`
 
-grep -E "o{2}"  /etc/passwd
+`grep -E "o{2}"  /etc/passwd`
 
 测试文件bb.txt 内容如下
 
 16.匹配文件bb.txtx 中 最少出现m次，最多出现n次
 
-grep "ro\{2,4\}"  bb.txt 
+`grep "ro\{2,4\}"  bb.txt `
 
-grep -E "ro{2,4}"  bb.txt 
+`grep -E "ro{2,4}"  bb.txt `
 
 分组测试文件cc.txt 内容如下
 
 17.匹配cc.txt文件中以2016开头且以2016结尾的行
 
-grep "^\(2016\).*\1$" cc.txt
+`grep "^\(2016\).*\1$" cc.txt`
 
-grep -E "^(2016).*\1$" cc.txt
+`grep -E "^(2016).*\1$" cc.txt`
 
 18.在cc.txt 文件中分组引用w(es)t 中的es
 
-grep "w\(es\)t.*\1" cc.txt
+`grep "w\(es\)t.*\1" cc.txt`
 
-grep -E "w(es)t.*\1" cc.txt
+`grep -E "w(es)t.*\1" cc.txt`
 
 19.匹配cc.txt文件中的数字与大小写字母
 
-grep "[[:alnum:]]" cc.txt
+`grep "[[:alnum:]]" cc.txt`
 
-grep "[0-9a-Z]" cc.txt 
+`grep "[0-9a-Z]" cc.txt `
 
 20.匹配cc.txt文件的空白键
 
-grep "[[:space:]]" cc.txt 
+`grep "[[:space:]]" cc.txt `
 
 21.从/etc/passwd中匹配包含ro字符串，且字母至少出现一次以上的行
 
-grep -E "ro+" /etc/passwd
+`grep -E "ro+" /etc/passwd`
 
 22.在bb.txt 文件中，匹配其roo前导字符0次或1次
 
-grep -E "roo?" bb.txt 
+`grep -E "roo?" bb.txt `
 
 23.从/etc/passwd中匹配test1或best1
 
-grep "[t|b]est1" /etc/passwd
+`grep "[t|b]est1" /etc/passwd`
 
 24.在/etc/passwd上查找用户id和组id在500到1099之间的行
 
-grep "\<1\?[05][0-9][0-9]\>" /etc/passwd
+`grep "\<1\?[05][0-9][0-9]\>" /etc/passwd`
 
-grep -E "\<1?[05][0-9][0-9]\>" /etc/passwd
+`grep -E "\<1?[05][0-9][0-9]\>" /etc/passwd`
 
 25. 找出ifconfig命令结果中的1-255之间的数字
 
-ifconfig | grep -o -E "\<([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\>"
+`ifconfig | grep -o -E "\<([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\>"`
 
 26. 显示/etc/passwd文件中其默认shell为/bin/bash的用户
 
-grep "/bin/bash$" /etc/passwd | sort -t: -k3 -n | tail -1 | cut -d: -f1
+`grep "/bin/bash$" /etc/passwd | sort -t: -k3 -n | tail -1 | cut -d: -f1`
 
 
 
@@ -643,7 +615,7 @@ awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Ke
 
 使用方法
 
-awk '{pattern + action}' {filenames}
+`awk '{pattern + action}' {filenames}`
 
 尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。
 
@@ -663,11 +635,11 @@ awk语言的最基本功能是在文件或者字符串中基于指定规则浏�
 
 假设last -n 5的输出如下
 
-[root@www ~]# last -n 5 <==仅取出前五行root pts/1 192.168.1.100 Tue Feb 10 11:21 still logged inroot pts/1 192.168.1.100 Tue Feb 10 00:46 - 02:28 (01:41)root pts/1 192.168.1.100 Mon Feb 9 11:41 - 18:30 (06:48)dmtsai pts/1 192.168.1.100 Mon Feb 9 11:41 - 11:41 (00:00)root tty1 Fri Sep 5 14:09 - 14:10 (00:01)
+`[root@www ~]# last -n 5 <==仅取出前五行root pts/1 192.168.1.100 Tue Feb 10 11:21 still logged inroot pts/1 192.168.1.100 Tue Feb 10 00:46 - 02:28 (01:41)root pts/1 192.168.1.100 Mon Feb 9 11:41 - 18:30 (06:48)dmtsai pts/1 192.168.1.100 Mon Feb 9 11:41 - 11:41 (00:00)root tty1 Fri Sep 5 14:09 - 14:10 (00:01)`
 
 如果只是显示最近登录的5个帐号
 
-#last -n 5 | awk '{print $1}'
+`last -n 5 | awk '{print $1}'`
 
 root
 
@@ -679,11 +651,11 @@ dmtsai
 
 root
 
-awk工作流程是这样的：读入有'\n'换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是"空白键" 或 "[tab]键",所以$1表示登录用户，$3表示登录用户ip,以此类推。
+awk工作流程是这样的：读入有`'\n'`换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，`$0`则表示所有域,`$1`表示第一个域,`$n`表示第n个域。默认域分隔符是`"空白键" `或` "[tab]键",`所以`$1`表示登录用户，`$3`表示登录用户ip,以此类推。
 
 如果只是显示/etc/passwd的账户
 
-#cat /etc/passwd |awk -F ':' '{print $1}' rootdaemonbinsys
+`cat /etc/passwd | awk -F ':' '{print $1}' rootdaemonbinsys`
 
 这种是awk+action的示例，每行都会执行action{print $1}。
 
@@ -691,17 +663,18 @@ awk工作流程是这样的：读入有'\n'换行符分割的一条记录，然�
 
 如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以tab键分割
 
-#cat /etc/passwd |awk -F ':' '{print $1"\t"$7}'root /bin/bashdaemon /bin/shbin /bin/shsys /bin/sh
+`cat /etc/passwd |awk -F ':' '{print $1"\t"$7}'root /bin/bashdaemon /bin/shbin /bin/shsys /bin/sh`
 
 如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加"blue,/bin/nosh"。
 
-cat /etc/passwd |awk -F ':' 'BEGIN {print "name,shell"} {print $1","$7} END {print "blue,/bin/nosh"}'name,shellroot,/bin/bashdaemon,/bin/shbin,/bin/shsys,/bin/sh....blue,/bin/nosh
+`cat /etc/passwd |awk -F ':' 'BEGIN {print "name,shell"} {print $1","$7} END {print "blue,/bin/nosh"}'name,shellroot,/bin/bashdaemon,/bin/shbin,/bin/shsys,/bin/sh....blue,/bin/nosh`
 
-awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。
+awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，`$0`则表示所有域,`$1`表示第一个域,`$n`表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。
 
 搜索/etc/passwd有root关键字的所有行
 
-#awk -F: '/root/' /etc/passwdroot:x:0:0:root:/root:/bin/bash
+`awk -F: '/root/' /etc/passwd`
+root:x:0:0:root:/root:/bin/bash
 
 这种是pattern的使用示例，匹配了pattern(这里是root)的行才会执行action(没有指定action，默认输出每行的内容)。
 
@@ -709,7 +682,7 @@ awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n
 
 搜索/etc/passwd有root关键字的所有行，并显示对应的shell
 
-# awk -F: '/root/{print $7}' /etc/passwd /bin/bash
+` awk -F: '/root/{print $7}' /etc/passwd /bin/bash`
 
 这里指定了action{print $7}
 
@@ -719,15 +692,15 @@ awk有许多内置变量用来设置环境信息，这些变量可以被改变�
 
 ARGC 命令行参数个数ARGV 命令行参数排列ENVIRON 支持队列中系统环境变量的使用FILENAME awk浏览的文件名FNR 浏览文件的记录数（已读当前文件的记录数）FS 设置输入域分隔符，等价于命令行 -F选项NF 浏览记录的域的个数NR 已读的总记录数OFS 输出域分隔符ORS 输出记录分隔符RS 控制记录分隔符
 
-此外,$0变量是指整条记录。$1表示当前行的第一个域,$2表示当前行的第二个域,......以此类推。
+此外,`$0`变量是指整条记录。`$1`表示当前行的第一个域,`$2`表示当前行的第二个域,......以此类推。
 
 统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:
 
-awk -F ':' '{print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0}' /etc/passwdfilename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/bin/bashfilename:/etc/passwd,linenumber:2,columns:7,linecontent:daemon:x:1:1:daemon:/usr/sbin:/bin/shfilename:/etc/passwd,linenumber:3,columns:7,linecontent:bin:x:2:2:bin:/bin:/bin/shfilename:/etc/passwd,linenumber:4,columns:7,linecontent:sys:x:3:3:sys:/dev:/bin/sh
+`awk -F ':' '{print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0}' /etc/passwdfilename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/bin/bashfilename:/etc/passwd,linenumber:2,columns:7,linecontent:daemon:x:1:1:daemon:/usr/sbin:/bin/shfilename:/etc/passwd,linenumber:3,columns:7,linecontent:bin:x:2:2:bin:/bin:/bin/shfilename:/etc/passwd,linenumber:4,columns:7,linecontent:sys:x:3:3:sys:/dev:/bin/sh`
 
 使用printf替代print,可以让代码更加简洁，易读
 
-awk -F ':' '{printf("filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n",FILENAME,NR,NF,$0)}' /etc/passwd
+`awk -F ':' '{printf("filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n",FILENAME,NR,NF,$0)}' /etc/passwd`
 
 print和printf
 
@@ -745,21 +718,22 @@ awk编程
 
 下面统计/etc/passwd的账户人数
 
-awk '{count++;print $0;} END{print "user count is ", count}' /etc/passwdroot:x:0:0:root:/root:/bin/bash......user count is  40
+`awk '{count++;print $0;} END{print "user count is ", count}' `
+`/etc/passwdroot:x:0:0:root:/root:/bin/bash......user count is  40`
 
 count是自定义变量。之前的action{}里都是只有一个print,其实print只是一个语句，而action{}可以有多个语句，以;号隔开。
 
 这里没有初始化count，虽然默认是0，但是妥当的做法还是初始化为0:
 
-awk 'BEGIN {count=0;print "[start]user count is ", count} {count=count+1;print $0;} END{print "[end]user count is ", count}' /etc/passwd[start]user count is 0root:x:0:0:root:/root:/bin/bash...[end]user count is 40
+`awk 'BEGIN {count=0;print "[start]user count is ", count} {count=count+1;print $0;} END{print "[end]user count is ", count}' /etc/passwd[start]user count is 0root:x:0:0:root:/root:/bin/bash...[end]user count is 40`
 
 统计某个文件夹下的文件占用的字节数
 
-ls -l |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ", size}'[end]size is  8657198
+`ls -l |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ", size}'[end]size is  8657198`
 
 如果以M为单位显示:
 
-ls -l |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ", size/1024/1024,"M"}'[end]size is  8.25889 M
+`ls -l |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ", size/1024/1024,"M"}'[end]size is  8.25889 M`
 
 注意，统计不包括文件夹的子目录。
 
@@ -767,13 +741,13 @@ ls -l |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ", size/1024
 
 awk中的条件语句是从C语言中借鉴来的，见如下声明方式：
 
-if (expression) {
+`if (expression) {
 
-statement; statement; ... ...}if (expression) { statement;} else { statement2;}if (expression) { statement1;} else if (expression1) { statement2;} else { statement3;}
+statement; statement; ... ...}if (expression) { statement;} else { statement2;}if (expression) { statement1;} else if (expression1) { statement2;} else { statement3;}`
 
 统计某个文件夹下的文件占用的字节数,过滤4096大小的文件(一般都是文件夹):
 
-ls -l |awk 'BEGIN {size=0;print "[start]size is ", size} {if($5!=4096){size=size+$5;}} END{print "[end]size is ", size/1024/1024,"M"}'[end]size is  8.22339 M
+`ls -l |awk 'BEGIN {size=0;print "[start]size is ", size} {if($5!=4096){size=size+$5;}} END{print "[end]size is ", size/1024/1024,"M"}'[end]size is  8.22339 M`
 
 循环语句
 
@@ -785,7 +759,7 @@ awk中的循环语句同样借鉴于C语言，支持while、do/while、for、bre
 
 显示/etc/passwd的账户
 
-awk -F ':' 'BEGIN {count=0;} {name[count] = $1;count++;}; END{for (i = 0; i < NR; i++) print i, name[i]}' /etc/passwd0 root1 daemon2 bin3 sys4 sync5 games......
+`awk -F ':' 'BEGIN {count=0;} {name[count] = $1;count++;}; END{for (i = 0; i < NR; i++) print i, name[i]}' /etc/passwd0 root1 daemon2 bin3 sys4 sync5 games......`
 
 这里使用for循环遍历数组
 
