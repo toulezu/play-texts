@@ -86,15 +86,15 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 ###例子
 
-1.将/etc/passwd，有出现 root 的行取出来,同时显示这些行在/etc/passwd的行号
+1. 将/etc/passwd，有出现 root 的行取出来,同时显示这些行在/etc/passwd的行号
 
 `grep -n root /etc/passwd`
 
-2.用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,要将捉到的关键字显色，且加上行号来表示：
+2. 用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,要将捉到的关键字显色，且加上行号来表示：
 
 `dmesg | grep -n eth`
 
-3.将/etc/passwd，将没有出现 root 的行取出来
+3. 将/etc/passwd，将没有出现 root 的行取出来
 
 `grep -v root /etc/passwd`
 
