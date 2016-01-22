@@ -159,27 +159,19 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 	 
 	 `grep -E "o{2}"  /etc/passwd`
 
->测试文件bb.txt 内容如下
+- 匹配文件中 最少出现m次，最多出现n次
 
->ro
+	`grep "ro\{2,4\}"  bb.txt `
 
->roooooooooooooooooot
+	`grep -E "ro{2,4}"  bb.txt `
 
-16.匹配文件bb.txtx 中 最少出现m次，最多出现n次
+- 匹配文件中以2016开头且以2016结尾的行，`\1` 代表要匹配的子串在
 
-`grep "ro\{2,4\}"  bb.txt `
+	`grep "^\(2016\).*\1$" cc.txt`
 
-`grep -E "ro{2,4}"  bb.txt `
+	`grep -E "^(2016).*\1$" cc.txt`
 
-分组测试文件cc.txt 内容如下
-
-17.匹配cc.txt文件中以2016开头且以2016结尾的行
-
-`grep "^\(2016\).*\1$" cc.txt`
-
-`grep -E "^(2016).*\1$" cc.txt`
-
-18.在cc.txt 文件中分组引用w(es)t 中的es
+- 在文件中分组引用w(es)t 中的es
 
 `grep "w\(es\)t.*\1" cc.txt`
 
