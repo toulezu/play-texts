@@ -61,22 +61,22 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 `\{m\}`|精确匹配其左侧的字符m次 如果是使用egrep 直接{m}
 
 #####位置锚定:
-参数|说明
--|-
-`^` |锚定行首
-`$` | 锚定行尾
-`^$` |匹配空白行,^[[:space:]]$ 一样的效果
+|参数|说明|
+|:-|-|
+|`^` |锚定行首|
+|`$` | 锚定行尾|
+|`^$` |匹配空白行,^[[:space:]]$ 一样的效果|
 #####单词锚定:
-参数|说明
--|-
-`\<` |锚定词首
-`\>`|锚定词尾
-`\<PATTERN\>`|匹配PATTERN能匹配到的整个单词
-`\b`|匹配一个字边界，即字与空格间的位置
-`\|` | 或的意思 `a\|b` 就是匹配a或者是b
-`f` | 分组及引用：
-`\(\) `|将`()`中字符集合到一起作为一个字符引用，如果是使用egrep 直接`()`
-`\#` | 引用，模式中自左而右,而非模式本身
+|参数|说明|
+|-|-|
+|`\<` |锚定词首|
+|`\>`|锚定词尾|
+|`\<PATTERN\>`|匹配PATTERN能匹配到的整个单词|
+|`\b`|匹配一个字边界，即字与空格间的位置|
+|`\|` | 或的意思 `a\|b` 就是匹配a或者是b|
+|`f` | 分组及引用：|
+|`\(\) `|将`()`中字符集合到一起作为一个字符引用，如果是使用egrep 直接`()`|
+|`\#` | 引用，模式中自左而右,而非模式本身|
 
 #####正则表达式的贪婪与非贪婪模式
 
@@ -100,23 +100,25 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 	`grep -v root /etc/passwd`
 
-4.用 dmesg 列出核心信息，再以 grep 找出内含 eth0 那行,在关键字所在行的前两行与后三行也一起捉出来显示
+- 用 dmesg 列出核心信息，再以 grep 找出内含 eth0 那行,在关键字所在行的前两行与后三行也一起捉出来显示
 
-`dmesg | grep -n -A3 -B2 'ethic'`
+	`dmesg | grep -n -A3 -B2 'ethic'`
 
-5.搜索cc.txt下aa 关键字忽略字母大小写，命令如下：
+- 搜索cc.txt下aa 关键字忽略字母大小写，命令如下：
 
-`grep -i 'aa' cc.txt`
+	`grep -i 'aa' cc.txt`
 
-6.在/etc/passwd 查找以root开头的行
+- 在/etc/passwd 查找以root开头的行
 
-`grep "^root" /etc/passwd`
+	`grep "^root" /etc/passwd`
 
-7. 在/etc/passwd  查找以nologin结尾的行
+- 在/etc/passwd  查找以nologin结尾的行
 
-`grep "nologin$" /etc/passwd`
+	`grep "nologin$" /etc/passwd`
 
-创建一个测试文件内容如下
+>创建一个测试文件内容如下: 
+>the test file 
+>their test file 
 
 8. 在siaz.txt 文件中匹配以the作为单词首部的行
 
