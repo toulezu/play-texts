@@ -31,13 +31,16 @@
 [网易新闻](http://news.163.com/)
 ![网易头像](http://img6.cache.netease.com/photo/0007/2016-01-06/BCLMS2T053DD0007.jpg)
 
-右边的是代码 
- `public static void main(String[] args)`
-` { System.out.println("hello world!!!"); }`
+下面是代码块
+```java
+ public static void main(String[] args) {
+   System.out.println("hello world!!!"); 
+ }
+```
 
 ### 下面是一个表格
 姓名|年龄|性别|积分  
--|-:|:-:|-:
+---|---:|:---:|---:
 张三|26|男|5633.23  
 李四|36|女|25565.30  
 王五|31|男|252.36  
