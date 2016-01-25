@@ -288,8 +288,7 @@ y|表示把一个字符翻译为另外的字符（但是不用于正则表达式
 ####sed用法实例
 
 我们先准备一个测试文件
-
-```
+```bash
 MacBook-Pro:tmp maxincai$ cat test.txt
 my cat's name is betty
 This is your dog
@@ -303,7 +302,7 @@ my goat's name is adam
 ####替换操作：`s`命令
 
 替换文本中的字符串：
-```
+```bash
 MacBook-Pro:tmp maxincai$ sed 's/This/aaa/' test.txt
 my cat's name is betty
 aaa is your dog
@@ -323,7 +322,8 @@ aaa is your goat
 ```
 
 直接编辑文件选项`-i`(inplace)，会将test.txt文件中每一行的第一个This替换为this:
-`[root@vagrant-centos65 workspace]# sed -i 's/This/this/' test.txt
+```bash
+[root@vagrant-centos65 workspace]# sed -i 's/This/this/' test.txt
 [root@vagrant-centos65 workspace]# cat test.txt
 my cat's name is betty
 this is your dog
@@ -331,8 +331,8 @@ my dog's name is frank
 this is your fish
 my fish's name is george
 this is your goat
-my goat's name is adam`
-
+my goat's name is adam
+```
 ####全面替换标记g
 
 使用后缀/g标记会替换每一行中的所有匹配：
