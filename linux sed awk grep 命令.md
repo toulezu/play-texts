@@ -315,11 +315,12 @@ my goat's name is adam
 ```
 
 ####`-n`选项和`p`命令一起使用表示只打印那些发生替换的行：
-
-`MacBook-Pro:tmp maxincai$ sed -n 's/This/aaa/p' test.txt
+```bash
+MacBook-Pro:tmp maxincai$ sed -n 's/This/aaa/p' test.txt
 aaa is your dog
 aaa is your fish
-aaa is your goat`
+aaa is your goat
+```
 
 直接编辑文件选项`-i`(inplace)，会将test.txt文件中每一行的第一个This替换为this:
 `[root@vagrant-centos65 workspace]# sed -i 's/This/this/' test.txt
