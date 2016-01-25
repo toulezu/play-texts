@@ -288,14 +288,14 @@ y|表示把一个字符翻译为另外的字符（但是不用于正则表达式
 ####sed用法实例
 
 我们先准备一个测试文件
-`MacBook-Pro:tmp maxincai$ cat test.txt
-my cat's name is betty
-This is your dog
-my dog's name is frank
-This is your fish
-my fish's name is george
-This is your goat
-my goat's name is adam`
+`MacBook-Pro:tmp maxincai$ cat test.txt`
+`my cat's name is betty`
+`This is your dog`
+`my dog's name is frank`
+`This is your fish`
+`my fish's name is george`
+`This is your goat`
+`my goat's name is adam`
 
 ####替换操作：`s`命令
 
