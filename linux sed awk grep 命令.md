@@ -336,35 +336,39 @@ my goat's name is adam
 ####全面替换标记g
 
 使用后缀/g标记会替换每一行中的所有匹配：
-`[root@vagrant-centos65 workspace]# sed 's/this/This/g' test.txt
+```bash
+[root@vagrant-centos65 workspace]# sed 's/this/This/g' test.txt
 my cat's name is betty
 This is your This dog
 my dog's name is This frank
 This is your fish
 my fish's name is This george
 This is your goat
-my goat's name is This adam`
-
+my goat's name is This adam
+```
 当需要从第N处匹配开始替换时，可以使用/Ng:
-`[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/2g'
+```bash
+[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/2g'
 skSKSKSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/3g'
 skskSKSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/4g'
-skskskSKSKSK`
-
+skskskSKSKSK
+```
 ####定界符
 
 以上命令中字符` / `在sed中作为定界符使用，也可以使用任意的定界符`:` 或者`|`
-`[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's:sk:SK:4g'
+```bash
+[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's:sk:SK:4g'
 skskskSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's|sk|SK|4g'
-skskskSKSKSK`
-
+skskskSKSKSK
+```
 定界符出现在样式内部时，需要进行转义：
-`[root@vagrant-centos65 workspace]# echo '/usr/local/bin' | sed 's/\/usr\/local\/bin/\/USR\/LOCAL\/BIN/g'
-/USR/LOCAL/BIN`
-
+```bash
+[root@vagrant-centos65 workspace]# echo '/usr/local/bin' | sed 's/\/usr\/local\/bin/\/USR\/LOCAL\/BIN/g'
+/USR/LOCAL/BIN
+```
 ####删除操作：`d`命令
 
 删除空白行:
