@@ -219,28 +219,24 @@ sed (stream editor) 是一种流编辑器，它是文本处理中非常有用的
 
 ###命令格式
 
-sed [options] 'command' file(s)
-sed [options] -f scriptfile file(s)
+`sed [options] 'command' file(s)`
+`sed [options] -f scriptfile file(s)`
 
 ###选项
 
-参数|完整参数|说明
--|-|-|-
+选项|完整选项|说明
+---|---|---|--
 -e|script|--expression=script|以选项中的指定的script来处理输入的文本文件
 -f|script|--files=script|以选项中的指定的script文件来处理输入的文本文件
 -h|--help|显示帮助
 -n|--quiet|--silent|仅显示script处理后的结果
+-i|--in-place|就地替换，加这个选项前注意备份文件
 -V|--version|显示版本信息
 
-####参数
-
-文件：指定待处理的文本文件列表
-
-sed命令
+####命令
 命令|说明
--|-
-d|删除，删除选择的行
-D|删除模板块的第一行
+---|---
+d|从模板块（Pattern space）位置删除行
 s|替换指定字符
 h|拷贝模板块的内容到内存中的缓冲区
 H|追加模板块的内容到内存中的缓冲区
@@ -249,8 +245,7 @@ G|获得内存缓冲区的内容，并追加到当前模板块文本的后面
 l|列表不能打印字符的清单
 n|读取下一个输入行，用下一个命令处理新的行而不是第一个命令
 N|追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码
-p|打印模板块的行
-P|打印模板块的第一行
+p|打印模板块的行(和 `-n` 选项一起使用)
 q|退出sed
 b label|分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾
 r file|从file中读行
@@ -264,66 +259,65 @@ W file|写并追加模板块的第一行到file末尾
 
 ####sed替换标记
 命令|说明
--|-
-g|	表示行内全面替换
-p| 	表示打印行
-w |	表示把行写入一个文件
-x 	|表示互换模板块中的文本和缓冲区中的文本
-y |	表示把一个字符翻译为另外的字符（但是不用于正则表达式）
-\1 	|子串匹配标记
-& 	|已匹配字符串标记
+---|---
+g|表示行内全面替换
+p|表示打印行
+w|表示把行写入一个文件
+x|表示互换模板块中的文本和缓冲区中的文本
+y|表示把一个字符翻译为另外的字符（但是不用于正则表达式）
+`\1`|子串匹配标记
+`&`|已匹配字符串标记
 
 ####sed元字符集
 命令|说明
--|-
-^ 	|匹配行开始，如：/^sed/匹配所有以sed开头的行。
-`$` 	|匹配行结束，如：/sed$/匹配所有以sed结尾的行。
-. 	|匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。
-`*` 	|匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。
-[] | 匹配一个指定范围内的字符，如/[sS]ed/匹配sed和Sed。
- [^] | 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。
- \(..\) | 匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。
- & | 保存搜索字符用来替换其他字符，如s/love/&/，love这成love。 
- \< | 匹配单词的开始，如:/\<love/匹配包含以love开头的单词的行。
- \ > | 匹配单词的结束，如/love>/匹配包含以love结尾的单词的行。
- x{m} | 重复字符x，m次，如：/0{5}/匹配包含5个0的行。
- x{m,} | 重复字符x，至少m次，如：/0{5,}/匹配至少有5个0的行。 
- x{m,n} | 重复字符x，至少m次，不多于n次，如：/0{5,10}/匹配5~10个0的行。
+---|---
+`^`|匹配行开始，如：/^sed/匹配所有以sed开头的行。
+`$`|匹配行结束，如：/sed$/匹配所有以sed结尾的行。
+`.`|匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。
+`*`|匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。
+`[]`|匹配一个指定范围内的字符，如/[sS]ed/匹配sed和Sed。
+`[^]`|匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。
+ `\(..\)`|匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。
+ `&`|保存搜索字符用来替换其他字符，如s/love/&/，love这成love。 
+ `\<`|匹配单词的开始，如:/\<love/匹配包含以love开头的单词的行。
+ `\>`|匹配单词的结束，如/love>/匹配包含以love结尾的单词的行。
+ `x{m}`|重复字符x，m次，如：/0{5}/匹配包含5个0的行。
+ `x{m,}`|重复字符x，至少m次，如：/0{5,}/匹配至少有5个0的行。 
+ `x{m,n}`|重复字符x，至少m次，不多于n次，如：/0{5,10}/匹配5~10个0的行。
  
 ####sed用法实例
 
-我们先准备一个测试文件
-
->MacBook-Pro:tmp maxincai$ cat test.txt
-my cat's name is betty
+>我们先准备一个测试文件
+`MacBook-Pro:tmp maxincai$ cat test.txt`
+`my cat's name is betty
 This is your dog
 my dog's name is frank
 This is your fish
 my fish's name is george
 This is your goat
-my goat's name is adam
+my goat's name is adam`
 
-####替换操作：s命令
+####替换操作：`s`命令
 
 >替换文本中的字符串：
-MacBook-Pro:tmp maxincai$ sed 's/This/aaa/' test.txt
+`MacBook-Pro:tmp maxincai$ sed 's/This/aaa/' test.txt
 my cat's name is betty
 aaa is your dog
 my dog's name is frank
 aaa is your fish
 my fish's name is george
 aaa is your goat
-my goat's name is adam
+my goat's name is adam`
 
-####-n选项和p命令一起使用表示只打印那些发生替换的行：
+####`-n`选项和`p`命令一起使用表示只打印那些发生替换的行：
 
->MacBook-Pro:tmp maxincai$ sed -n 's/This/aaa/p' test.txt
+`MacBook-Pro:tmp maxincai$ sed -n 's/This/aaa/p' test.txt
 aaa is your dog
 aaa is your fish
-aaa is your goat
+aaa is your goat`
 
->直接编辑文件选项-i(inplace)，会匹配test.txt文件中每一行的第一个This替换为this:
-[root@vagrant-centos65 workspace]# sed -i 's/This/this/' test.txt
+直接编辑文件选项`-i`(inplace)，会将test.txt文件中每一行的第一个This替换为this:
+`[root@vagrant-centos65 workspace]# sed -i 's/This/this/' test.txt
 [root@vagrant-centos65 workspace]# cat test.txt
 my cat's name is betty
 this is your dog
@@ -331,109 +325,106 @@ my dog's name is frank
 this is your fish
 my fish's name is george
 this is your goat
-my goat's name is adam
+my goat's name is adam`
 
 ####全面替换标记g
 
->使用后缀/g标记会替换每一行中的所有匹配：
-[root@vagrant-centos65 workspace]# sed 's/this/This/g' test.txt
+使用后缀/g标记会替换每一行中的所有匹配：
+`[root@vagrant-centos65 workspace]# sed 's/this/This/g' test.txt
 my cat's name is betty
 This is your This dog
 my dog's name is This frank
 This is your fish
 my fish's name is This george
 This is your goat
-my goat's name is This adam
+my goat's name is This adam`
 
->当需要从第N处匹配开始替换时，可以使用/Ng:
-[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/2g'
+当需要从第N处匹配开始替换时，可以使用/Ng:
+`[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/2g'
 skSKSKSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/3g'
 skskSKSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's/sk/SK/4g'
-skskskSKSKSK
+skskskSKSKSK`
 
 ####定界符
 
->以上命令中字符` / `在sed中作为定界符使用，也可以使用任意的定界符`:` 或者`|`
-[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's:sk:SK:4g'
+以上命令中字符` / `在sed中作为定界符使用，也可以使用任意的定界符`:` 或者`|`
+`[root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's:sk:SK:4g'
 skskskSKSKSK
 [root@vagrant-centos65 workspace]# echo sksksksksksk | sed 's|sk|SK|4g'
-skskskSKSKSK
+skskskSKSKSK`
 
->定界符出现在样式内部时，需要进行转义：
-[root@vagrant-centos65 workspace]# echo '/usr/local/bin' | sed 's/\/usr\/local\/bin/\/USR\/LOCAL\/BIN/g'
-/USR/LOCAL/BIN
+定界符出现在样式内部时，需要进行转义：
+`[root@vagrant-centos65 workspace]# echo '/usr/local/bin' | sed 's/\/usr\/local\/bin/\/USR\/LOCAL\/BIN/g'
+/USR/LOCAL/BIN`
 
-####删除操作：d命令
+####删除操作：`d`命令
 
->删除空白行：
-[root@vagrant-centos65 workspace]# cat test.txt
-my cat's name is betty
+删除空白行:
+`[root@vagrant-centos65 workspace]# cat test.txt
+my cat's name is betty`
 
-this is your this dog
+`this is your this dog`
 
-my dog's name is this frank
+`my dog's name is this frank`
 
-this is your fish
+`this is your fish`
+`my fish's name is this george`
+`this is your goat`
+`my goat's name is this adam`
 
-my fish's name is this george
-
-this is your goat
-
-my goat's name is this adam
-
->[root@vagrant-centos65 workspace]# `sed '/^$/d' test.txt`
+`[root@vagrant-centos65 workspace]# sed '/^$/d' test.txt
 my cat's name is betty
 this is your this dog
 my dog's name is this frank
 this is your fish
 my fish's name is this george
 this is your goat
-my goat's name is this adam
+my goat's name is this adam`
 
->删除文件的第2行：
-[root@vagrant-centos65 workspace]# `sed '2d' test.txt`
+删除文件的第2行：
+`[root@vagrant-centos65 workspace]# sed '2d' test.txt
 my cat's name is betty
 my dog's name is this frank
 this is your fish
 my fish's name is this george
 this is your goat
-my goat's name is this adam
+my goat's name is this adam`
 
->删除文件的第2行到末尾所有行：
-[root@vagrant-centos65 workspace]# sed '2,$d' test.txt
-my cat's name is betty
+删除文件的第2行到末尾所有行：
+`[root@vagrant-centos65 workspace]# sed '2,$d' test.txt
+my cat's name is betty`
 
->删除文件最后一行：
-[root@vagrant-centos65 workspace]# sed '$d' test.txt
+删除文件最后一行：
+`[root@vagrant-centos65 workspace]# sed '$d' test.txt
 my cat's name is betty
 this is your this dog
 my dog's name is this frank
 this is your fish
 my fish's name is this george
-this is your goat
+this is your goat`
 
->删除文件中所有以my开头的行：
-[root@vagrant-centos65 workspace]# `sed '/^my/'d test.txt`
+删除文件中所有以my开头的行：
+`[root@vagrant-centos65 workspace]# `sed '/^my/'d test.txt`
 this is your this dog
 this is your fish
-this is your goat
+this is your goat`
 
 ####已匹配字符串标记&
 
->正则表达式`\w\+`匹配每一个单词，使用`[&]`替换它，`&`对应之前所匹配到的单词：
-[root@vagrant-centos65 workspace]# `echo this is a test line | sed 's/\w\+/[&]/g'`
-`[this] [is] [a] [test] [line]`
+正则表达式`\w\+`匹配每一个单词，使用`[&]`替换它，`&`对应之前所匹配到的单词：
+`[root@vagrant-centos65 workspace]# echo this is a test line | sed 's/\w\+/[&]/g'
+[this] [is] [a] [test] [line]`
 
 ####子串匹配标记`\1`
 
->匹配给定样式的其中一部份：
-[root@vagrant-centos65 workspace]# `echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'`
-`this is 7 in a number`
+匹配给定样式的其中一部份：
+`[root@vagrant-centos65 workspace]# echo this is digit 7 in a number | sed 's/digit \([0-9]\)/\1/'
+this is 7 in a number`
 
->命令中digit 7，被替换成7.样式匹配到的子串是7，\(..\)用于匹配子串，对于匹配到的第一个子串标记为\1，依此类推匹配到的第二个结果就是\2,例如：
-[root@vagrant-centos65 workspace]# `echo aaa BBB | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
+命令中digit 7，被替换成7.样式匹配到的子串是7，\(..\)用于匹配子串，对于匹配到的第一个子串标记为\1，依此类推匹配到的第二个结果就是\2,例如：
+`[root@vagrant-centos65 workspace]# echo aaa BBB | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
 BBB aaa`
 
 ####组合多个表达式
@@ -446,22 +437,22 @@ BBB aaa`
 
 ####引用
 
->sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。
-[root@vagrant-centos65 workspace]# `test=hello`
-[root@vagrant-centos65 workspace]# `echo hello WORLD | sed "s/$test/HELLO/"
+sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。
+`[root@vagrant-centos65 workspace]# test=hello
+[root@vagrant-centos65 workspace]# echo hello WORLD | sed "s/$test/HELLO/"
 HELLO WORLD`
 
 ####选定行的范围`,`(逗号)
 
->打印从第5行开始到第一个包含以this开始的行之间的所有行：
-[root@vagrant-centos65 workspace]# `sed -n '5,/^this/p' test.txt`
-`my fish's name is this george`
-`this is your goat`
+打印从第5行开始到第一个包含以this开始的行之间的所有行：
+`[root@vagrant-centos65 workspace]# sed -n '5,/^this/p' test.txt
+my fish's name is this george
+this is your goat`
 
 ####多点编辑`e`命令
 
->-e选项允许在同一行里执行多条命令：
-[root@vagrant-centos65 workspace]# `sed -e '1,5d' -e 's/my/MY/' test.txt
+`-e`选项允许在同一行里执行多条命令
+`[root@vagrant-centos65 workspace]# sed -e '1,5d' -e 's/my/MY/' test.txt
 this is your goat
 MY goat's name is this adam`
 
