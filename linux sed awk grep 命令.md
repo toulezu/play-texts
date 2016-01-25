@@ -22,8 +22,8 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 -i|忽略字符大小写
 -n|输出匹配行的行号
 -q|安静模式，不打印任何标准输出/不常用
--E|扩展正则表达式，相当于egrep,egrep 扩展正则表达式/不常用
--F|固定字符串列表，相当于fgrep，fgrep 不支持正则表达式/不常用
+-E|扩展正则表达式，相当于egrep,egrep 扩展正则表达式
+-F|固定字符串列表，相当于fgrep，fgrep 不支持正则表达式
 -A|显示被模式匹配到的行及后n行
 -B|显示被模式匹配到的行及前n行
 -C|显示被模式匹配到的行及其前后各n行
@@ -70,7 +70,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 #####单词锚定
 |参数|说明|
-|-|-|
+|---|---|
 |`\<` |锚定词首|
 |`\>`|锚定词尾|
 |`\<PATTERN\>`|匹配PATTERN能匹配到的整个单词|
@@ -86,7 +86,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 >非贪婪匹配：就是匹配到结果就好，就少的匹配字符。
 
->默认是贪婪模式；在量词后面直接加上一个问号？就是非贪婪模式。
+>默认是贪婪模式；在量词后面直接加上一个问号？就是非贪婪模式，表示匹配0次或者1次
 
 ###例子
 
@@ -118,13 +118,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 	`grep "nologin$" /etc/passwd`
 
->创建一个测试文件内容如下: 
-
->the test file 
-
->their test file 
-
-- 在siaz.txt 文件中匹配以the作为单词首部的行
+- 在文件中匹配以the作为单词首部的行
 
 	`grep "\<the" siaz.txt`
 
@@ -157,7 +151,7 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 	`grep "o\{2\}"  /etc/passwd`
 	 
-	 `grep -E "o{2}"  /etc/passwd`
+	`grep -E "o{2}"  /etc/passwd`
 
 - 匹配文件中 最少出现m次，最多出现n次
 
@@ -173,51 +167,47 @@ Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep�
 
 - 在文件中分组引用w(es)t 中的es
 
-`grep "w\(es\)t.*\1" cc.txt`
+	`grep "w\(es\)t.*\1" cc.txt`
 
-`grep -E "w(es)t.*\1" cc.txt`
+	`grep -E "w(es)t.*\1" cc.txt`
 
-19.匹配cc.txt文件中的数字与大小写字母
+- 匹配cc.txt文件中的数字与大小写字母
 
-`grep "[[:alnum:]]" cc.txt`
+	`grep "[[:alnum:]]" cc.txt`
 
-`grep "[0-9a-Z]" cc.txt `
+	`grep "[0-9a-Z]" cc.txt `
 
-20.匹配cc.txt文件的空白键
+- 匹配cc.txt文件的空白键
 
-`grep "[[:space:]]" cc.txt `
+	`grep "[[:space:]]" cc.txt `
 
-21.从/etc/passwd中匹配包含ro字符串，且字母至少出现一次以上的行
+- 从/etc/passwd中匹配包含ro字符串，且字母至少出现一次以上的行
 
-`grep -E "ro+" /etc/passwd`
+	`grep -E "ro+" /etc/passwd`
 
-22.在bb.txt 文件中，匹配其roo前导字符0次或1次
+- 在bb.txt 文件中，匹配其roo前导字符0次或1次
 
-`grep -E "roo?" bb.txt `
+	`grep -E "roo?" bb.txt `
 
-23.从/etc/passwd中匹配test1或best1
+- 从/etc/passwd中匹配test1或best1
 
-`grep "[t|b]est1" /etc/passwd`
+	`grep "[t|b]est1" /etc/passwd`
 
-24.在/etc/passwd上查找用户id和组id在500到1099之间的行
+- 在/etc/passwd上查找用户id和组id在500到1099之间的行
 
-`grep "\<1\?[05][0-9][0-9]\>" /etc/passwd`
+	`grep "\<1\?[05][0-9][0-9]\>" /etc/passwd`
 
-`grep -E "\<1?[05][0-9][0-9]\>" /etc/passwd`
+	`grep -E "\<1?[05][0-9][0-9]\>" /etc/passwd`
 
-25. 找出ifconfig命令结果中的1-255之间的数字
+-  找出ifconfig命令结果中的1-255之间的数字
 
-`ifconfig | grep -o -E "\<([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\>"`
+	`ifconfig | grep -o -E "\<([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\>"`
 
-26. 显示/etc/passwd文件中其默认shell为/bin/bash的用户
+- 显示/etc/passwd文件中其默认shell为/bin/bash的用户
 
-`grep "/bin/bash$" /etc/passwd | sort -t: -k3 -n | tail -1 | cut -d: -f1`
-
-
-
-示例： `grep -l "hello"  test_file`
-说明：从`test_file`文件中找出含有 `hello`字符串的行
-
+	`grep "/bin/bash$" /etc/passwd | sort -t: -k3 -n | tail -1 | cut -d: -f1`
+> `sort -t: -k3 -n` 表示按`:` 分割字符串后，按第三位数字类型字符串排序
+> `cut -d: -f1` 表示按 `:` 分割字符串后，取第一位字符串
 
 ##sed ： 主要用来对文件中的字符串修改，比如替换字符串
 
