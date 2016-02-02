@@ -48,11 +48,12 @@ $ sudo docker run hello-world
 
 - 启动容器
 ```bash
-sudo docker run -ti --rm ubuntu /bin/bash
+sudo docker run -ti --rm --name=ubuntu-2 ubuntu /bin/bash
 ```
 其中 `-t` 选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上
 		`-i` 选项则让容器的标准输入保持打开
-`rm` 命令删除容器
+`rm` 命令 表示退出的时候同时删除容器
+`name` 命令 表示容器的名称是 ubuntu-2
 
 - 退出容器，exit后容器内的数据不会被清空。
 ```bash
@@ -61,8 +62,8 @@ exit
 ```
 *当我们输入exit后，容器就停止工作了。只有在指定的`/bin/bash`命令处于运行状态的时间，容器才会相应地处于运行状态。一旦退出容器，`/bin/bash`命令也就结束了，这时容器也就停止了。*
 
-- 退出容器后再进入
-```sh
+- 退出容器后再进入(`ps -a`, `start/stop`, attach )
+```bash
 sudo docker ps -a
 
 CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS                         PORTS                    NAMES
@@ -74,7 +75,29 @@ ubuntu-1
 sudo docker attach ubuntu-1
 ```
 - 删除容器
-```sh
+```bash
 sudo docker rm ubuntu-1
 ubuntu-1
 ```
+
+- 在容器中安装Java和Tomcat
+```bash
+apt-cache search jdk
+apt-get install java-6-openjdk
+apt-cache search tomcat
+apt-get install java-6-openjdk
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
